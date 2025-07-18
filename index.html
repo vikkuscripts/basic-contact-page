@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Entry</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <form autocomplete="off" method="post" name="google-sheet">
+        <h2><center>Contact Form</center></h2>
+
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter Your Name"
+          required
+        />
+        <input
+          type="text"
+          id="mobile"
+          name="mobile"
+          placeholder="Enter Your Mobile No"
+          required
+        />
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter Your Email"
+          required
+        />
+
+        <select id="class" name="department" required>
+          <option value="Not Selected">Select Your Department</option>
+          <option value="BCA">BCA</option>
+          <option value="BBA">BBA</option>
+          <option value="BCom">BCom</option>
+          <option value="BSc">BSc</option>
+          <option value="BA">BA</option>
+          <option value="BTECH">BTECH</option>
+        </select>
+
+        <textarea
+          rows="4"
+          placeholder="How Can I Help YOu"
+          name="message"
+        ></textarea>
+
+        <div
+          style="
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 10px;
+          "
+        >
+          <label name="gender">Gender:</label>
+          <span>
+            <label for="male">Male</label>
+            <input type="radio" id="male" name="gender" value="Male" required />
+          </span>
+          <span>
+            <label for="female">Female</label>
+            <input type="radio" id="female" name="gender" value="Female" />
+          </span>
+          <span>
+            <label for="other">Other</label>
+            <input type="radio" id="other" name="gender" value="Other" />
+          </span>
+        </div>
+        <br /><br />
+
+        <div
+          style="display: flex; gap: 15px; justify-content: center"
+          class="button-container"
+        >
+          <button class="button" type="submit" name="submit">Submit</button>
+          <button class="reset-button" type="reset">Reset</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyel578vJpy3m_h7w-88MYqX1-sEXOSYFA85HjBn1d0BFYVjvk_cPJTDHUsBWNKYgFqrg/exec";
+      const form = document.forms["google-sheet"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) =>
+            alert("Thanks for Contacting us..! We Will Contact You Soon...")
+          )
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
